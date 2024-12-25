@@ -27,33 +27,12 @@ def extract_vacancy_data(html):
 
     # Получаем объединённый текст
     title = ''.join(h1_element.stripped_strings)
-
-    print(title)
-
-    # Поэтапное извлечение названия вакансии
-    # title_h1 = soup.find('h1', {'data-qa': 'title'})
-    # if title_h1:
-    #     # Собираем текст из всех span-элементов внутри h1
-    #     title = ''.join(span.text for span in title_h1.find_all('span'))
-    #     title = ' '.join(title.split())  # Нормализация пробелов
-    # else:
-    #     title = "Название вакансии не найдено"
-    #
-    # print(f"Итоговое название вакансии: {title}")
-
-    # Извлечение заголовка вакансии
-    # title = soup.find("h1", {"data-qa": "vacancy-title"}).text.strip()
-
     salary = safe_find(soup, 'span[data-qa="vacancy-salary-compensation-type-net"]')
     experience = safe_find(soup, 'span[data-qa="vacancy-experience"]')
     employment_mode = safe_find(soup, 'p[data-qa="vacancy-view-employment-mode"]')
     company = safe_find(soup, 'a[data-qa="vacancy-company-name"]')
     location = safe_find(soup, 'p[data-qa="vacancy-view-location"]')
     description = safe_find(soup, 'div[data-qa="vacancy-description"]')
-    # skills = [
-    #     skill.text.strip()
-    #     for skill in soup.select('span[data-qa="bloko-tag__text"]')
-    # ]
     skills = [
         skill.text.strip()
         for skill in soup.select('li[data-qa="skills-element"]')
